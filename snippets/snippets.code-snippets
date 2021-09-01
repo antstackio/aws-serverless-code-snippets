@@ -1,0 +1,559 @@
+{
+  "S3 Bucket import with AWS SDK": {
+    "prefix": "cas3",
+    "body": ["const AWS = require('aws-sdk');", "const s3 = new AWS.S3();"],
+    "description": " s3 import statement using AWS SDK"
+  },
+
+  "S3 Bucket List Object Template": {
+    "prefix": "!s3list",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:Parameter_For_Bucket} = {",
+      "Bucket: \"${5:Bucket_name}\",",
+      "Prefix: \"${6:path_name}/\"",
+      "};",
+      "try{",
+      "const ${3:variable_to_store data} = await s3.listObjectV2(${2:Parameter_For_Bucket}).promise();",
+      "const ${4:variable_to_return} = ${3:variable to store}.Contents;",
+      "return ${4:variable_to_return};",
+      "}catch (error){",
+      "console.error(\"Get Object from S3 :\", error);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "S3 Bucket ListObject code snippet with Bucket Params inside the function"
+  },
+
+  "S3 Bucket Get Object Template": {
+    "prefix": "!s3Get",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:Bucket_params} = {",
+      "Bucket: \"${3:Bucket_Name}\",",
+      "Keys: \"${4:file_path}\"",
+      "}",
+      "try{",
+      "const ${5:variable1_s3_data} = await s3.getObject(${2:Bucket_params}).promise();",
+      "console.log(\"S3 Data \", ${5:variable_s3_data});",
+      "return ${5:variable_s3_data};",
+      "}catch (error){",
+      "console.error(\"Get Object from S3 :\", error);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "S3 Bucket Get Object Template with bucket param inside the function"
+  },
+  "S3 Bucket Upload Object Template": {
+    "prefix": "!s3Upload",
+    "body": [
+      "const ${0:function_name} = async() => {",
+      "const ${1:Bucket_params} = {",
+      "Bucket: \"${2:Bucket_Name}\",",
+      "Keys: \"${3:file_path}\",",
+      "Expires: \"${5:bucket_expire_time}\"",
+      "}",
+      "try{",
+      "const ${4:variable1_s3_data} = await s3.putObject(${1:Bucket_params}).promise();",
+      "console.log(\"S3 Data \", ${4:variable_s3_data});",
+      "return ${4:variable_s3_data};",
+      "}catch (error){",
+      "console.error(\"Put Object to S3 :\", error);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "S3 Bucket Upload Object Template"
+  },
+  "S3 Bucket Upload with Metadata Object Template": {
+    "prefix": "!s3UWM",
+    "body": [
+      "const ${0:function_name} = async() => {",
+      "const ${1:Bucket_params} = {",
+      "Bucket: \"${2:Bucket_Name}\",",
+      "Keys: \"${3:file_path}\",",
+      "Expires: \"${5:bucket_expire_time}\",",
+      "Metadata: {",
+      "\"${6:metadata1}\":\"${7:value1}\" ",
+      "}",
+      "}",
+      "try{",
+      "const ${4:variable1_s3_data} = await s3.putObject(${1:Bucket_params}).promise();",
+      "console.log(\"S3 Data \", ${4:variable_s3_data});",
+      "return ${4:variable_s3_data};",
+      "}catch (error){",
+      "console.error(\"Put Object to S3 :\", error);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "S3 Bucket Upload with Metadata Object Template"
+  },
+  "S3 Bucket Copy Object from one Bucket to another Bucket Template": {
+    "prefix": "!s3C",
+    "body": [
+      "const ${0:function_name} = async() => {",
+      "const ${1:Bucket_params} = {",
+      "Bucket: \"${2:Destination_Bucket_Name}\",",
+      "CopySource: \"${3:Source_Bucket_name}/\",",
+      "Keys: \"${4:file_path}\"",
+      "}",
+      "try{",
+      "const ${5:variable1_s3_data} = await s3.copyObject(${1:Bucket_params}).promise();",
+      "console.log(\"Copied S3 Data \", ${5:variable_s3_data});",
+      "return ${5:variable_s3_data};",
+      "}catch (error){",
+      "console.error(\"Copy Object to S3 :\", error);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "S3 Bucket Copy Object from one Bucket to another Bucket Template"
+  },
+  "s3 Create Bucket Template": {
+    "prefix": "!s3Cr",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:Bucket_params} = {",
+      "Bucket: \"${3:Bucket_name}\",",
+      "CreateBucketConfiguration: {",
+      "LocationConstraint: \"${4:Bucket_Region_name}\"",
+      "}",
+      "};",
+      "try{",
+      "const ${5:variable_1} = await s3.createObject(${2:Bucket_params}).promise();",
+      "console.log(\"Bucket created in the selected region\");",
+      "return ${5:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in Creating Bucket: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "s3 Create Bucket with region Template"
+  },
+  "s3 Delete Bucket Template": {
+    "prefix": "!s3D",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:Bucket_params} = {",
+      "Bucket: \"${3:Bucket_name}\"",
+      "};",
+      "try{",
+      "const ${4:variable_1} = await s3.deleteBucket(${2:Bucket_params}).promise();",
+      "console.log(\"Bucket deleted successfully......\");",
+      "return ${4:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in Delete Bucket: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "s3 Delete Bucket Template"
+  },
+  "s3 Bucket Delete Object Template": {
+    "prefix": "!s3Do",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:Bucket_params} = {",
+      "Bucket: \"${3:Bucket_name}\",",
+      "Key: : \"${4:File_path}\"",
+      "};",
+      "try{",
+      "const ${5:variable_1} = await s3.deleteObject(${2:Bucket_params}).promise();",
+      "console.log(\"Object deleted successfully......\");",
+      "return ${5:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in Deleting Object in the Bucket: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "s3 Bucket Delete Object Template"
+  },
+  "s3 Bucket Get Metadata Template": {
+    "prefix": "!s3GM",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:Bucket_params} = {",
+      "Bucket: \"${3:Bucket_name}\",",
+      "Key:  \"${4:File_path}\"",
+      "};",
+      "try{",
+      "const ${5:variable_1} = await s3.headObject(${2:Bucket_params}).promise();",
+      "console.log(\"Metadata from object without returning object itself\", ${5:variable_1});",
+      "return ${5:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in getting metadata of the object in the Bucket: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "s3 Bucket Get Metadata Template"
+  },
+  "SQS import with AWS SDK": {
+    "prefix": "casq",
+    "body": ["const AWS = require('aws-sdk');", "const sqs = new AWS.SQS();"],
+    "description": " sqs import statement using AWS SDK"
+  },
+  "SQS Create Queue Template": {
+    "prefix": "!sqsC",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SQS_Params} = {",
+      "QueueName: \"${3:Queue_name}\",",
+      "Attributes: {",
+      "\"${4:QueueAttributeName_1}\":\"${5:Value}\"",
+      "},",
+      "Tags: {",
+      "\"${6:Tag_key}\":\"${7:Tag_Value}\"",
+      "}",
+      "};",
+      "try{",
+      "const ${8:variable_1} = await sqs.createQueue(${2:SQS_Params}).promise();",
+      "console.log(\"SQS Queue is created successfully....\", ${8:variable_1});",
+      "return ${8:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SQS Queue creation: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SQS Create Queue Template"
+  },
+  "SQS Purge Queue Template": {
+    "prefix": "!sqsP",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SQS_Params} = {",
+      "QueueUrl: \"${3:Queue_name}\"",
+      "};",
+      "try{",
+      "const ${4:variable_1} = await sqs.purgeQueue(${2:SQS_Params}).promise();",
+      "console.log(\"SQS Queue is purged successfully....\", ${4:variable_1});",
+      "return ${4:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SQS purging queue: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SQS Purge Queue Template"
+  },
+  "SQS Send Message Template": {
+    "prefix": "!sqsS",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SQS_Params} = {",
+      "MessageBody: \"${3:Message_details}\",",
+      "QueueUrl: \"${4:Queue_name}\"",
+      "};",
+      "try{",
+      "const ${5:variable_1} = await sqs.sendMessage(${2:SQS_Params}).promise();",
+      "console.log(\"SQS Message send successfully....\", ${5:variable_1});",
+      "return ${5:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SQS send message: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SQS Send Message Template"
+  },
+  "SQS Receive Message Template": {
+    "prefix": "!sqsR",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SQS_Params} = {",
+      "QueueUrl: \"${3:Queue_name}\",",
+      "MaxNumberOfMessages: \"${4:MaxNumberOfMessages_value}\",",
+      "ReceiveRequestAttemptId: \"${5:ReceiveRequestAttemptId_value}\",",
+      "VisibilityTimeout: \"${6:visibilityTimeout_value}\",",
+      "WaitTimeSeconds: \"${7:waittimeseconds_value}\"",
+      "};",
+      "try{",
+      "const ${8:variable_1} = await sqs.receiveMessage(${2:SQS_Params}).promise();",
+      "console.log(\"SQS Message received successfully....\", ${8:variable_1});",
+      "return ${8:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SQS receive message: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SQS Receive Message Template"
+  },
+  "SQS list queues Template": {
+    "prefix": "!sqsL",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SQS_Params} = {",
+      "MaxResults: \"${3:MaxResults_value}\",",
+      "NextToken: \"${4:NextToken_value}\",",
+      "QueueNamePrefix: \"${5:QueueNamePrefix_value}\"",
+      "};",
+      "try{",
+      "const ${6:variable_1} = await sqs.listQueues(${2:SQS_Params}).promise();",
+      "console.log(\"SQS listed queues successfully....\", ${6:variable_1});",
+      "return ${6:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SQS list queues: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SQS list queues Template"
+  },
+  "SQS get queue URL Template": {
+    "prefix": "!sqsG",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SQS_Params} = {",
+      "QueueName: \"${3:QueueName_value}\",",
+      "QueueOwnerAWSAccountId: \"${4:QueueOwnerAWSAccountId_value}\"",
+      "};",
+      "try{",
+      "const ${5:variable_1} = await sqs.getQueueUrl(${2:SQS_Params}).promise();",
+      "console.log(\"SQS Get QueueUrl successfully....\", ${5:variable_1});",
+      "return ${5:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SQS Get queueUrl: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SQS get queue URL Template"
+  },
+  "SQS Delete Message Template": {
+    "prefix": "!sqsDM",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SQS_Params} = {",
+      "QueueUrl: \"${3:QueueUrl_value}\",",
+      "ReceiptHandle: \"${4: ReceiptHandle_value}\"",
+      "};",
+      "try{",
+      "const ${5:variable_1} = await sqs. deleteMessage(${2:SQS_Params}).promise();",
+      "console.log(\"SQS message deleted successfully....\", ${5:variable_1});",
+      "return ${5:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SQS Delete Message: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SQS Delete Message Template"
+  },
+  "SQS Delete Queue Template": {
+    "prefix": "!sqsDQ",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SQS_Params} = {",
+      "QueueUrl: \"${3:QueueUrl_value}\",",
+      "};",
+      "try{",
+      "const ${4:variable_1} = await sqs.deleteQueue(${2:SQS_Params}).promise();",
+      "console.log(\"SQS Queue deleted successfully....\", ${4:variable_1});",
+      "return ${4:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SQS Delete Queue: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SQS Delete Queue Template"
+  },
+  "SQS DeadLetterSourceQueue Template": {
+    "prefix": "!sqsDLQ",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SQS_Params} = {",
+      "QueueUrl: \"${3:QueueUrl_value}\",",
+      "MaxResults: \"${4:MaxResults_value}\",",
+      "NextToken: \"${5:NextToken_value}",
+      "};",
+      "try{",
+      "const ${6:variable_1} = await sqs.listDeadLetterSourceQueues(${2:SQS_Params}).promise();",
+      "console.log(\"SQS Dead LetterSourceQueues lists\", ${6:variable_1});",
+      "return ${6:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SQS ListDeadLetterSourceQueues: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SQS DeadLetterSourceQueue Template"
+  },
+  "SNS import with AWS SDK": {
+    "prefix": "casn",
+    "body": ["const AWS = require('aws-sdk');", "const sns = new AWS.SNS();"],
+    "description": " sns import statement using AWS SDK"
+  },
+
+  "SNS Create Topic Template": {
+    "prefix": "!snsCT",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SNS_Params} = {",
+      "Name: \"${3:Name_value}\",",
+      "Attributes: {",
+      "\"${4:Attributes_Name}\": \"${5:Attributes_value}\",",
+      "},",
+      "Tags: [",
+      "{${6:Tags_Key_1}: \"${7:Tags_Value_1}\"}",
+      "]",
+      "};",
+      "try{",
+      "const ${8:variable_1} = await sns.createTopic(${2:SNS_Params}).promise();",
+      "console.log(\"SNS Topic created successfully...\", ${8:variable_1});",
+      "return ${8:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SNS Create Topic: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SNS Create Topic Template"
+  },
+  "SNS Get Topic Attribute Template": {
+    "prefix": "!snsGT",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SNS_Params} = {",
+      "TopicArn: \"${3:TopicArn_value}\"",
+      "};",
+      "try{",
+      "const ${4:variable_1} = await sns.getTopicAttributes(${2:SNS_Params}).promise();",
+      "console.log(\"Get Topic Attributes\", ${4:variable_1});",
+      "return ${4:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SNS Get TopicAttribute: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SNS Get Topic Attribute Template"
+  },
+  "SNS ListTopics Template": {
+    "prefix": "!snsLT",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SNS_Params} = {",
+      "NextToken: \"${3:NextToken_value}\"",
+      "};",
+      "try{",
+      "const ${4:variable_1} = await sns.listTopics(${2:SNS_Params}).promise();",
+      "console.log(\"List Topics\", ${4:variable_1});",
+      "return ${4:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SNS List Topics: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SNS ListTopics Template"
+  },
+  "SNS ListSubscriptions Template": {
+    "prefix": "!snsLS",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SNS_Params} = {",
+      "NextToken: \"${3:NextToken_value}\"",
+      "};",
+      "try{",
+      "const ${4:variable_1} = await sns.listSubscriptions(${2:SNS_Params}).promise();",
+      "console.log(\"List Subscriptions\", ${4:variable_1});",
+      "return ${4:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SNS List Subscriptions: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SNS ListSubscriptions Template"
+  },
+  "SNS ConfirmSubscriptions Template": {
+    "prefix": "!snsCS",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SNS_Params} = {",
+      "Token: \"${3:Token_value}\",",
+      "TokenArn: \"${4:TokenArn_value}\",",
+      "AuthenticateOnUnsubscribe:\"${5:AuthenticateOnUnsubscribe_value}\"",
+      "};",
+      "try{",
+      "const ${6:variable_1} = await sns.confirmSubscription(${2:SNS_Params}).promise();",
+      "console.log(\"Confirm Subscriptions\", ${6:variable_1});",
+      "return ${6:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SNS Confirm Subscriptions: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SNS ConfirmSubscriptions Template"
+  },
+  "SNS Create Platform Application Template": {
+    "prefix": "!snsCPA",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SNS_Params} = {",
+      "Attributes: {",
+      "\"${3:Attribute_key}\": \"${4:Attribute_value}\",",
+      "},",
+      "Name: \"${5:Name_value}\",",
+      "Platform:\"${6: Platform_value}\"",
+      "};",
+      "try{",
+      "const ${7:variable_1} = await sns.createPlatformApplication(${2:SNS_Params}).promise();",
+      "console.log(\"Create Platform application\", ${7:variable_1});",
+      "return ${7:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SNS Create Platform Application: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SNS Create Platform Application Template"
+  },
+  "SNS Delete Topic Template": {
+    "prefix": "!snsDT",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SNS_Params} = {",
+      "TopicArn: \"${3:TopicArn_value}\"",
+      "};",
+      "try{",
+      "const ${4:variable_1} = await sns.deleteTopic(${2:SNS_Params}).promise();",
+      "console.log(\"SNS Topic deleted Successfully\", ${4:variable_1});",
+      "return ${4:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SNS Delete Topic: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SNS Delete Topic Template"
+  },
+  "SNS Delete Platform Application Template": {
+    "prefix": "!snsDPA",
+    "body": [
+      "const ${1:function_name} = async() => {",
+      "const ${2:SNS_Params} = {",
+      "PlatformApplicationArn: \"${3: PlatformApplicationArn_value}\"",
+      "};",
+      "try{",
+      "const ${4:variable_1} = await sns.deletePlatformApplication(${2:SNS_Params}).promise();",
+      "console.log(\"SNS Platform Application deleted Successfully\", ${4:variable_1});",
+      "return ${4:variable_1};",
+      "} catch (error){",
+      "console.error(\"Error in SNS Delete Platform Application: \", error.stack);",
+      "return error;",
+      "}",
+      "}"
+    ],
+    "description": "SNS Delete Platform Application Template"
+  }
+}

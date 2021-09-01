@@ -1,0 +1,31 @@
+{
+  "name": "aws-js-code-snippet",
+  "displayName": "AWS JS CODE SNIPPET",
+  "description": "Javascript Code snippets for AWS services",
+  "version": "1.0.0",
+  "icon": "icon/aws_extension.png",
+  "publisher": "The Gentle Giant",
+  "engines": {
+    "vscode": "^1.59.0"
+  },
+  "license": "SEE LICENSE IN LICENSE.txt",
+  "bugs": {
+    "url": "https://github.com/subbusainath/aws-js-code-snippet/issues",
+    "email": "subbusainath@outlook.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/subbusainath/aws-js-code-snippet.git"
+  },
+  "categories": [
+    "Snippets"
+  ],
+  "contributes": {
+    "snippets": [
+      {
+        "language": "javascript",
+        "path": "./snippets/snippets.code-snippets"
+      }
+    ]
+  }
+}
