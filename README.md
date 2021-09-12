@@ -1,4 +1,4 @@
-# aws-js-code-snippet README
+# AWS Serverless Code Snippets
 
 Welcome to AWS JAVASCRIPT CODE SNIPPET vscode extension. With Use of this extension you can increase your speed of creating AWS service functions with single commands. Hope this extension is very useful to everyone. This project is an open source project. Contribution to this project is most welcome.
 
