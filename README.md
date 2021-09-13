@@ -40,8 +40,8 @@ npm install aws-sdk
 const function_name = async () => {
   const Bucket_params = {
     Bucket: "Bucket_Name",
-    Keys: "file-path",
-    Expires: "bucket-expire-time",
+    Keys: "file_path",
+    Expires: "bucket_expire_time",
   };
   try {
     const variable1_s3_data = await s3.putObject(Bucket_params).promise();
@@ -55,169 +55,179 @@ const function_name = async () => {
 
 ```
 
-### `!s3list`
+### `!s3List`
 
 ```
-const function_name = async() => {
-const Parameter_For_Bucket = {
-Bucket: "Bucket_name",
-Prefix: "path_name/"
+const function_name = async () => {
+  const Parameter_For_Bucket = {
+    Bucket: "Bucket_name",
+    Prefix: "path_name/",
+  };
+  try {
+    const variable_to_store_data = await s3
+      .listObjectV2({ 2: Parameter_For_Bucket })
+      .promise();
+    const variable_to_return = variable_to_store_data.Contents;
+    return variable_to_return;
+  } catch (error) {
+    console.error("Get Object from S3 :", error);
+    return error;
+  }
 };
-try{
-const variable_to_store_data = await s3.listObjectV2(Parameter_For_Bucket).promise();
-const variable_to_return = variable_to_store_data.Contents;
-return variable_to_return;
-}catch (error){
-console.error("Get Object from S3 :", error);
-return error;
-}
-}
 
 ```
 
 ### `!s3Get`
 
 ```
-const function_name = async() => {
-const Bucket_params = {
-Bucket: "Bucket_Name",
-Keys: "file_path"
-}
-try{
-const variable1_s3_data = await s3.getObject(Bucket_params).promise();
-console.log("S3 Data ", variable1_s3_data);
-return variable1_s3_data;
-}catch (error){
-console.error("Get Object from S3 :", error);
-return error;
-}
-}
+const function_name = async () => {
+  const Bucket_params = {
+    Bucket: "Bucket_Name",
+    Keys: "file_path",
+  };
+  try {
+    const variable1_s3_data = await s3.getObject(Bucket_params).promise();
+    console.log("S3 Data ", variable1_s3_data);
+    return variable1_s3_data;
+  } catch (error) {
+    console.error("Get Object from S3 :", error);
+    return error;
+  }
+};
+
 
 ```
 
 ### `!s3UWM`
 
 ```
-const function_name = async() => {
-const Bucket_params = {
-Bucket: "Bucket_Name",
-Keys: "file-path",
-Expires: "bucket-expire-time",
-Metadata: {
-"metadata1":"value1"
-}
-}
-try{
-const variable1_s3_data = await s3.putObject(Bucket_params).promise();
-console.log("S3 Data ", variable1_s3_data);
-return variable1_s3_data;
-}catch (error){
-console.error("Put Object to S3 :", error);
-return error;
-}
-}
+const function_name = async () => {
+  const Bucket_params = {
+    Bucket: "Bucket_Name",
+    Keys: "file_path",
+    Expires: "bucket_expire_time",
+    Metadata: {
+      metadata1: "value1",
+    },
+  };
+  try {
+    const variable1_s3_data = await s3.putObject(Bucket_params).promise();
+    console.log("S3 Data ", variable1_s3_data);
+    return variable1_s3_data;
+  } catch (error) {
+    console.error("Put Object to S3 :", error);
+    return error;
+  }
+};
 
 ```
 
 ### `!s3C`
 
 ```
-const function_name = async() => {
-const Bucket_params = {
-Bucket: "Destination-Bucket-Name",
-CopySource: "Source-Bucket-name/",
-Keys: "file-path"
-}
-try{
-const variable1_s3_data = await s3.copyObject(Bucket_params).promise();
-console.log("Copied S3 Data ", variable1_s3_data);
-return variable1_s3_data;
-}catch (error){
-console.error("Copy Object to S3 :", error);
-return error;
-}
-}
+const function_name = async () => {
+  const Bucket_params = {
+    Bucket: "Destination_Bucket_Name",
+    CopySource: "Source_Bucket_name/",
+    Keys: "file_path",
+  };
+  try {
+    const variable1_s3_data = await s3.copyObject(Bucket_params).promise();
+    console.log("Copied S3 Data ", variable1_s3_data);
+    return variable1_s3_data;
+  } catch (error) {
+    console.error("Copy Object to S3 :", error);
+    return error;
+  }
+};
 
 ```
 
 ### `!s3Cr`
 
 ```
-const function_name = async() => {
-const Bucket_params = {
-Bucket: "Bucket-name",
-CreateBucketConfiguration: {
-LocationConstraint: "Bucket-Region-name"
-}
+const function_name = async () => {
+  const Bucket_params = {
+    Bucket: "Bucket_name",
+    CreateBucketConfiguration: {
+      LocationConstraint: "Bucket_Region_name",
+    },
+  };
+  try {
+    const variable_1 = await s3.createObject(Bucket_params).promise();
+    console.log("Bucket created in the selected region");
+    return variable_1;
+  } catch (error) {
+    console.error("Error in Creating Bucket: ", error.stack);
+    return error;
+  }
 };
-try{
-const variable_1 = await s3.createObject(Bucket_params).promise();
-console.log("Bucket created in the selected region");
-return variable_1;
-} catch (error){
-console.error("Error in Creating Bucket: ", error.stack);
-return error;
-}
-}
 
 ```
 
 ### `!s3D`
 
 ```
-const function_name = async() => {
-const Bucket_params = {
-Bucket: "Bucket-name"
+const function_name = async () => {
+  const Bucket_params = {
+    Bucket: "Bucket_name",
+  };
+  try {
+    const variable_1 = await s3.deleteBucket(Bucket_params).promise();
+    console.log("Bucket deleted successfully......");
+    return variable_1;
+  } catch (error) {
+    console.error("Error in Delete Bucket: ", error.stack);
+    return error;
+  }
 };
-try{
-const variable_1 = await s3.deleteBucket(Bucket_params).promise();
-console.log("Bucket deleted successfully......");
-return variable_1;
-} catch (error){
-console.error("Error in Delete Bucket: ", error.stack);
-return error;
-}
-}
-
 ```
 
 ### `!s3Do`
 
 ```
-const function_name = async() => {
-const Bucket_params = {
-Bucket: "Bucket_name",
-Key:  "File-path"
+const function_name = async () => {
+  const Bucket_params = {
+    Bucket: "Bucket_name",
+    Key: "File_path",
+  };
+  try {
+    const variable_1 = await s3.deleteObject(Bucket_params).promise();
+    console.log("Object deleted successfully......");
+    return variable_1;
+  } catch (error) {
+    console.error("Error in Deleting Object in the Bucket: ", error.stack);
+    return error;
+  }
 };
-try{
-const variable_1 = await s3.deleteObject(Bucket_params).promise();
-console.log("Object deleted successfully......");
-return variable_1;
-} catch (error){
-console.error("Error in Deleting Object in the Bucket: ", error.stack);
-return error;
-}
-}
+
 
 ```
 
 ### `!s3GM`
 
 ```
-const function_name = async() => {
-const Bucket_params = {
-Bucket: "Bucket_name",
-Key:  "File_path"
+const function_name = async () => {
+  const Bucket_params = {
+    Bucket: "Bucket_name",
+    Key: "File_path",
+  };
+  try {
+    const variable_1 = await s3.headObject(Bucket_params).promise();
+    console.log(
+      "Metadata from object without returning object itself",
+      variable_1
+    );
+    return variable_1;
+  } catch (error) {
+    console.error(
+      "Error in getting metadata of the object in the Bucket: ",
+      error.stack
+    );
+    return error;
+  }
 };
-try{
-const variable_1 = await s3.headObject(Bucket_params).promise();
-console.log("Metadata from object without returning object itself", variable_1);
-return variable_1;
-} catch (error){
-console.error("Error in getting metadata of the object in the Bucket: ", error.stack);
-return error;
-}
-}
+
 
 ```
 
@@ -226,125 +236,129 @@ return error;
 ### `!sqsC`
 
 ```
-const function_name = async() => {
-const SQS_Params = {
-QueueName: "Queue_name",
-Attributes: {
-"QueueAttributeName-1":"Value"
-},
-Tags: {
-"Tag-key":"Tag-Value"
-}
+const function_name = async () => {
+  const SQS_Params = {
+    QueueName: "Queue_name",
+    Attributes: {
+      QueueAttributeName_1: "Value",
+    },
+    Tags: {
+      Tag_key: "Tag_Value",
+    },
+  };
+  try {
+    const variable_1 = await sqs.createQueue(SQS_Params).promise();
+    console.log("SQS Queue is created successfully....", variable_1);
+    return variable_1;
+  } catch (error) {
+    console.error("Error in SQS Queue creation: ", error.stack);
+    return error;
+  }
 };
-try{
-const variable_1 = await sqs.createQueue(SQS_Params).promise();
-console.log("SQS Queue is created successfully....", variable_1);
-return variable_1;
-} catch (error){
-console.error("Error in SQS Queue creation: ", error.stack);
-return error;
-}
-}
+
 
 ```
 
 ### `!sqsP`
 
 ```
-const function_name = async() => {
-const SQS_Params = {
-QueueUrl: "Queue_name"
+const function_name = async () => {
+  const SQS_Params = {
+    QueueUrl: "Queue_name",
+  };
+  try {
+    const variable_1 = await sqs.purgeQueue(SQS_Params).promise();
+    console.log("SQS Queue is purged successfully....", variable_1);
+    return variable_1;
+  } catch (error) {
+    console.error("Error in SQS purging queue: ", error.stack);
+    return error;
+  }
 };
-try{
-const variable_1 = await sqs.purgeQueue(SQS_Params).promise();
-console.log("SQS Queue is purged successfully....", variable_1);
-return variable_1;
-} catch (error){
-console.error("Error in SQS purging queue: ", error.stack);
-return error;
-}
-}
+
 
 ```
 
 ### `!sqsS`
 
 ```
-const function_name = async() => {
-const SQS_Params = {
-MessageBody: "Message-details",
-QueueUrl: "Queue_name"
+const function_name = async () => {
+  const SQS_Params = {
+    MessageBody: "Message_details",
+    QueueUrl: "Queue_name",
+  };
+  try {
+    const variable_1 = await sqs.sendMessage(SQS_Params).promise();
+    console.log("SQS Message send successfully....", variable_1);
+    return variable_1;
+  } catch (error) {
+    console.error("Error in SQS send message: ", error.stack);
+    return error;
+  }
 };
-try{
-const variable_1 = await sqs.sendMessage(SQS_Params).promise();
-console.log("SQS Message send successfully....", variable_1);
-return variable_1;
-} catch (error){
-console.error("Error in SQS send message: ", error.stack);
-return error;
-}
-}
+
 ```
 
 ### `!sqsR`
 
 ```
-const function_name = async() => {
-const SQS_Params = {
-QueueUrl: "Queue_name",
-MaxNumberOfMessages: "MaxNumberOfMessages_value",
-ReceiveRequestAttemptId: "ReceiveRequestAttemptId_value",
-VisibilityTimeout: "visibilityTimeout_value",
-WaitTimeSeconds: "waittimeseconds_value"
+const function_name = async () => {
+  const SQS_Params = {
+    QueueUrl: "Queue_name",
+    MaxNumberOfMessages: "MaxNumberOfMessages_value",
+    ReceiveRequestAttemptId: "ReceiveRequestAttemptId_value",
+    VisibilityTimeout: "visibilityTimeout_value",
+    WaitTimeSeconds: "waitTimeSeconds_value",
+  };
+  try {
+    const variable_1 = await sqs.receiveMessage(SQS_Params).promise();
+    console.log("SQS Message received successfully....", variable_1);
+    return variable_1;
+  } catch (error) {
+    console.error("Error in SQS receive message: ", error.stack);
+    return error;
+  }
 };
-try{
-const variable_1 = await sqs.receiveMessage(SQS_Params).promise();
-console.log("SQS Message received successfully....", variable_1);
-return variable_1;
-} catch (error){
-console.error("Error in SQS receive message: ", error.stack);
-return error;
-}
-}
+
 ```
 
 ### `!sqsL`
 
 ```
-const function_name = async() => {
-const SQS_Params = {
-MaxResults: "MaxResults_value",
-NextToken: "NextToken_value",
-QueueNamePrefix: "QueueNamePrefix_value"
+const function_name = async () => {
+  const SQS_Params = {
+    MaxResults: "MaxResults_value",
+    NextToken: "NextToken_value",
+    QueueNamePrefix: "QueueNamePrefix_value",
+  };
+  try {
+    const variable_1 = await sqs.listQueues(SQS_Params).promise();
+    console.log("SQS listed queues successfully....", variable_1);
+    return variable_1;
+  } catch (error) {
+    console.error("Error in SQS list queues: ", error.stack);
+    return error;
+  }
 };
-try{
-const variable_1 = await sqs.listQueues(SQS_Params).promise();
-console.log("SQS listed queues successfully....", variable_1);
-return variable_1;
-} catch (error){
-console.error("Error in SQS list queues: ", error.stack);
-return error;
-}
-}
 ```
 
 ### `!sqsG`
 
 ```
-const function_name = async() => {
-const SQS_Params = {
-QueueName: "QueueName_value",
-QueueOwnerAWSAccountId: "QueueOwnerAWSAccountId_value"
+const function_name = async () => {
+  const SQS_Params = {
+    QueueName: "QueueName_value",
+    QueueOwnerAWSAccountId: "QueueOwnerAWSAccountId_value",
+  };
+  try {
+    const variable_1 = await sqs.getQueueUrl(SQS_Params).promise();
+    console.log("SQS Get QueueUrl successfully....", variable_1);
+    return variable_1;
+  } catch (error) {
+    console.error("Error in SQS Get queueUrl: ", error.stack);
+    return error;
+  }
 };
-try{
-const variable_1 = await sqs.getQueueUrl(SQS_Params).promise();
-console.log("SQS Get QueueUrl successfully....", variable_1);
-return variable_1;
-} catch (error){
-console.error("Error in SQS Get queueUrl: ", error.stack);
-return error;
-}
-}
 ```
 
 ### `!sqsDM`
@@ -353,7 +367,7 @@ return error;
 const function_name = async () => {
   const SQS_Params = {
     QueueUrl: "QueueUrl_value",
-    ReceiptHandle: " ReceiptHandle_value",
+    ReceiptHandle: "  ReceiptHandle_value",
   };
   try {
     const variable_1 = await sqs.deleteMessage(SQS_Params).promise();
@@ -364,6 +378,7 @@ const function_name = async () => {
     return error;
   }
 };
+
 ```
 
 ### `!sqsDQ`
@@ -404,6 +419,7 @@ const function_name = async () => {
     return error;
   }
 };
+
 ```
 
 ## SNS Snippets
@@ -482,6 +498,7 @@ const function_name = async () => {
     return error;
   }
 };
+
 ```
 
 ### `!snsCS`
@@ -502,6 +519,7 @@ const function_name = async () => {
     return error;
   }
 };
+
 ```
 
 ### `!snsCPA`
@@ -513,7 +531,7 @@ const function_name = async () => {
       Attribute_key: "Attribute_value",
     },
     Name: "Name_value",
-    Platform: " Platform_value",
+    Platform: "  Platform_value",
   };
   try {
     const variable_1 = await sns
@@ -544,6 +562,7 @@ const function_name = async () => {
     return error;
   }
 };
+
 ```
 
 ### `!snsDPA`
@@ -551,7 +570,7 @@ const function_name = async () => {
 ```
 const function_name = async () => {
   const SNS_Params = {
-    PlatformApplicationArn: " PlatformApplicationArn_value",
+    PlatformApplicationArn: "  PlatformApplicationArn_value",
   };
   try {
     const variable_1 = await sns
