@@ -1,21 +1,21 @@
 {
   "name": "aws-js-code-snippet",
-  "displayName": "AWS JS CODE SNIPPET",
+  "displayName": "AWS SERVERLESS JAVASCRIPT CODE SNIPPETS",
   "description": "Javascript Code snippets for AWS services",
   "version": "1.0.0",
   "icon": "icon/aws_extension.png",
-  "publisher": "The Gentle Giant",
+  "publisher": "Antstack Technologies",
   "engines": {
     "vscode": "^1.59.0"
   },
   "license": "SEE LICENSE IN LICENSE.txt",
   "bugs": {
-    "url": "https://github.com/subbusainath/aws-js-code-snippet/issues",
-    "email": "subbusainath@outlook.com"
+    "url": "https://github.com/antstackio/aws-serverless-code-snippets/issues",
+    "email": "subbusainath@antstack.io"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/subbusainath/aws-js-code-snippet.git"
+    "url": "https://github.com/antstackio/aws-serverless-code-snippets.git"
   },
   "categories": [
     "Snippets"
