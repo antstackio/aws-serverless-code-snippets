@@ -4,7 +4,7 @@
   "description": "Javascript Code snippets for AWS services",
   "version": "1.0.0",
   "icon": "icon/aws_extension.png",
-  "publisher": "antstack",
+  "publisher": "AntStack",
   "engines": {
     "vscode": "^1.59.0"
   },
