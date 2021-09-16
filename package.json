@@ -1,9 +1,8 @@
 {
   "name": "aws-js-code-snippet",
-  "displayName": "AWS Serverless Javascript Code Snippets",
+  "displayName": "AWS Serverless Code Snippets",
   "description": "Javascript Code snippets for AWS services",
   "version": "1.0.0",
-  "icon": "icon/aws_extension.png",
   "publisher": "AntStack",
   "engines": {
     "vscode": "^1.59.0"

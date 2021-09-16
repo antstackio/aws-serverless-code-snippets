@@ -1,10 +1,10 @@
 # AWS Serverless Code Snippets
 
-With Use of this extension you can increase your speed of creating AWS service functions with single commands. This project is an open source project. Contribution to this project is most welcome.
+With the use of this extension, you can increase your speed of creating AWS service functions with single commands. This project is an open-source project. Contribution to this project is most welcome.
 
 ## Features
 
-- You can create simple AWS Service functions with the single commands. I have created snippets for AWS S3,SQS and SNS services for now.
+- You can create simple AWS Service functions with a single command. We have created snippets for AWS S3, SQS, and SNS services for now.
 
 - Use `Tab->` to jumping between the highlighted texts to edit the text as per your desires
 
@@ -12,7 +12,7 @@ With Use of this extension you can increase your speed of creating AWS service f
 
 ## Requirements
 
-Before Install this VSCode Extension for AWS Code Snippet. Please install AWS-SDK in your local. By Running this command.
+Before Install this VSCode Extension for AWS Code Snippet. Please install AWS-SDK in your local. By running this command.
 
 ```
 npm install aws-sdk
@@ -588,7 +588,7 @@ const function_name = async () => {
 
 # Contribute
 
-To all the wonderful souls, who is here for contributing to this project. Use this tool to convert your code into json format.
+To all the wonderful souls, who is here for contributing to this project. Use this tool to convert your code into JSON format.
 
 [Click Me to Convert Your code to Json](https://snippet-generator.app/?description=sample+test+&tabtrigger=&snippet=&mode=vscode)
 
@@ -596,6 +596,6 @@ To all the wonderful souls, who is here for contributing to this project. Use th
 
 ### 1.0.0
 
-## Initial Release of AWS Javascript code snippet extension to increase productivity....
+## Initial Release of AWS JavaScript code snippet extension to increase productivity.
 
-- AWS-SDK javascript snippets for S3 Bucket, Simple Queue Service and Simple Notification Service
+- AWS-SDK JavaScript snippets for S3 Bucket, Simple Queue Service and Simple Notification Service
