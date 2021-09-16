@@ -1,6 +1,6 @@
 {
   "name": "aws-js-code-snippet",
-  "displayName": "AWS SERVERLESS JAVASCRIPT CODE SNIPPETS",
+  "displayName": "AWS Serverless Javascript Code Snippets",
   "description": "Javascript Code snippets for AWS services",
   "version": "1.0.0",
   "icon": "icon/aws_extension.png",
