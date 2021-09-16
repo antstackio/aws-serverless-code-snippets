@@ -25,16 +25,6 @@ npm install aws-sdk
 
 <br>
 
-## Contributing
-
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-[Code of Conduct](https://github.com/antstackio/aws-serverless-code-snippets/blob/master/CODE_OF_CONDUCT.md)
-
-## License
-
-[MIT](https://github.com/antstackio/aws-serverless-code-snippets/blob/master/LICENSE)
-
 ## Snippet info
 
 #### Basic Snippets
@@ -597,11 +587,19 @@ const function_name = async () => {
 
 ```
 
-# Contribute
 
-To all the wonderful souls, who is here for contributing to this project. Use this tool to convert your code into JSON format.
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+[Code of Conduct](https://github.com/antstackio/aws-serverless-code-snippets/blob/master/CODE_OF_CONDUCT.md)
 
 [Click Me to Convert Your code to Json](https://snippet-generator.app/?description=sample+test+&tabtrigger=&snippet=&mode=vscode)
+
+## License
+
+[MIT](https://github.com/antstackio/aws-serverless-code-snippets/blob/master/LICENSE)
+
 
 ## Release Notes
 
@@ -610,3 +608,4 @@ To all the wonderful souls, who is here for contributing to this project. Use th
 ## Initial Release of AWS JavaScript code snippet extension to increase productivity.
 
 - AWS-SDK JavaScript snippets for S3 Bucket, Simple Queue Service and Simple Notification Service
+
