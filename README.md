@@ -1,6 +1,7 @@
 # AWS Serverless Code Snippets
 
-With the use of this extension, you can increase your speed of creating AWS service functions with single commands. This project is an open-source project. Contribution to this project is most welcome.
+With the use of this extension, you can increase your speed of creating AWS service functions with single command. This project is an open-source project.
+
 
 ## Features
 
@@ -24,9 +25,19 @@ npm install aws-sdk
 
 <br>
 
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+[Code of Conduct](https://github.com/antstackio/aws-serverless-code-snippets/blob/master/CODE_OF_CONDUCT.md)
+
+## License
+
+[MIT](https://github.com/antstackio/aws-serverless-code-snippets/blob/master/LICENSE)
+
 ## Snippet info
 
-#### BASIC Snippet
+#### Basic Snippets
 
 |  Prefix | Method                                                        |
 | ------: | ------------------------------------------------------------- |
