@@ -594,6 +594,12 @@ To all the wonderful souls, who is here for contributing to this project. Use th
 
 ## Release Notes
 
+### 1.0.1
+
+## Bug Fixes
+
+- Fixed the Bucket params
+
 ### 1.0.0
 
 ## Initial Release of AWS JavaScript code snippet extension to increase productivity.
