@@ -28,12 +28,12 @@ npm install aws-sdk
 
 #### Basic Snippets
 
-|   Prefix | Method                                                            |
-| -------: | ----------------------------------------------------------------- |
-|  `cas3→` | `const AWS = require('aws-sdk');`,`const s3 = new AWS.S3()`       |
-|  `casq→` | `const AWS = require('aws-sdk');`,`const sqs = new AWS.SQS()`     |
-|  `casn→` | `const AWS = require('aws-sdk');`,`const sns = new AWS.SNS()`     |
-| `cadb->` | `const AWS = require('aws-sdk');`,`const db = new AWS.DynamoDB()` |
+|  Prefix | Method                                                            |
+| ------: | ----------------------------------------------------------------- |
+| `cas3→` | `const AWS = require('aws-sdk');`,`const s3 = new AWS.S3()`       |
+| `casq→` | `const AWS = require('aws-sdk');`,`const sqs = new AWS.SQS()`     |
+| `casn→` | `const AWS = require('aws-sdk');`,`const sns = new AWS.SNS()`     |
+| `cadb→` | `const AWS = require('aws-sdk');`,`const db = new AWS.DynamoDB()` |
 
 ### `!s3Upload`
 
@@ -589,6 +589,393 @@ const function_name = async () => {
 
 ## DynamoDB Snippets
 
+### `!dbC`
+
+```
+const function_name = async () => {
+  const params = {
+    TableName: "`Table_name`",
+    KeySchema: [
+      {
+        AttributeName: "`AttributeName`",
+        KeyType: "`KeyType`",
+      },
+      {
+        AttributeName: "`AttributeName`",
+        KeyType: "`KeyType`",
+      },
+    ],
+    AttributeDefinitions: [
+      {
+        AttributeName: "`AttributeName`",
+        AttributeType: "`AttributeType`",
+      },
+      {
+        AttributeName: "`AttributeName`",
+        AttributeType: "`AttributeType`",
+      },
+    ],
+    ProvisionedThroughput: {
+      ReadCapacityUnits: `ReadCapacityUnits`,
+      WriteCapacityUnits: `WriteCapacityUnits`,
+    },
+  };
+
+  try {
+    const variable = await db.createTable(params).promise();
+    return {
+      statusCode: 201,
+      body: JSON.stringify({
+        db_data: variable,
+        message: "data created successfully in the db",
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error_message: error.message,
+        message: "Something went wrong! check it out!",
+      }),
+    };
+  }
+};
+
+```
+
+### `!dbNP`
+
+```
+const dbClient = new AWS.DynamoDB.DocumentClient();
+
+const function_name = async () => {
+  const params = {
+    TableName: "`TableName`",
+    Item: {
+      "`variable_1`": "`variable_2`",
+      "`variable_3`": "`variable_4`",
+    },
+  };
+
+  try {
+    const function_data = await dbClient.put(params).promise();
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        db_data: function_data,
+        message: "data updated successfully in the db",
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error_message: error.message,
+        message: "Unable to add an item to the table! check it out!",
+      }),
+    };
+  }
+};
+```
+
+### `!dbUU`
+
+```
+const function_name = async () => {
+  const params = {
+    TableName: "`TableName`",
+    Key: {
+      "`TableVariable`": "`tableValue`",
+      "`TableVariable`": "ValueVariable",
+    },
+    UpdateExpression: "`UpdateExpression`",
+    ExpressionAttributeValues: {
+      "`ExpressionAttributeValue`", // "key":"value"
+    },
+    ReturnValue: "UPDATED_NEW",
+  };
+
+  try {
+    const variable = await dbClient.update(params).promise();
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        db_data: variable,
+        message: "data updated successfully in the db",
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error_message: error.message,
+        message: "Unable to update the table, check it out!",
+      }),
+    };
+  }
+};
+```
+
+### `!dbCU`
+
+```
+const dbClient = new AWS.DynamoDB.DocumentClient();
+
+const function_name = async () => {
+  const params = {
+    TableName: "`TableName`",
+    Key: {
+      "`TableVariable`": "`tableValue`",
+      "`TableVariable`": "ValueVariable",
+    },
+    UpdateExpression: "`UpdateExpression`",
+    ConditionExpression: "`ConditionExpressionValue`",
+    ExpressionAttributeValues: {
+      "`ExpressionAttributeValue`", // "key":"value"
+    },
+    ReturnValue: "UPDATED_NEW",
+  };
+
+  try {
+    const variable = await dbClient.update(params).promise();
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        db_data: variable,
+        message: "data updated successfully in the db",
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error_message: error.message,
+        message: "Unable to update the table, check it out!",
+      }),
+    };
+  }
+};
+```
+
+### `!dbQ`
+
+```
+const dbClient = new AWS.DynamoDB.DocumentClient();
+
+const function_name = async () => {
+  const params = {
+    TableName: "`TableName`",
+    KeyConditionExpression: "`ConditionExpression`",
+    FilterExpression: 'FilterExpressionValues',
+    ExpressionAttributeValues: {
+      "`ExpressionAttributeValue`", // "key":"value"
+    },
+  };
+
+  try {
+    const variable = await dbClient.query(params).promise();
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        db_data: variable.Items,
+        message: "Successfully Queried the data from the table",
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error_message: error.message,
+        message: "Unable to query data from the table, check it out!",
+      }),
+    };
+  }
+}
+```
+
+### `!dbDI`
+
+```
+const dbClient = new AWS.DynamoDB.DocumentClient();
+
+const function_name = async () => {
+  const params = {
+    TableName: "`TableNameValue`",
+    Key: {
+      key: "`values`",
+    },
+  };
+  try {
+    const variable = await dbClient.delete(params).promise();
+    return {
+      statusCode: 204,
+      body: JSON.stringify({
+        db_data: variable,
+        message: "data deleted successfully from the db",
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error_message: error.message,
+        message: "Unable to delete data from the table, check it out!",
+      }),
+    };
+  }
+};
+```
+
+### `!dbG`
+
+```
+const dbClient = new AWS.DynamoDB.DocumentClient();
+
+const function_name = async () => {
+  const params = {
+    TableName: "`TableNameValue`",
+    Key: {
+      key: "`values`",
+    },
+  };
+
+  try {
+    const variable = await dbClient.get(params).promise();
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        db_data: variable.Item,
+        message: "Successfully Retrieved item from DynamoDB table",
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error_message: error.message,
+        message: "Unable to get item from the table, check it out!",
+      }),
+    };
+  }
+};
+```
+
+### `!dbS`
+
+```
+const function_name = async () => {
+  const params = {
+    TableName: "`TableNameValue`",
+    FilterExpression: "`FilterExpressionValue`",
+    ExpressionAttributeValues: {
+      "`ExpressionAttributeValue`": "`ExpressionAttributeValue`",
+    },
+    ProjectionExpression: "`ProjectionExpressionValue`",
+  };
+
+  try {
+    const variable = await db.scan(params).promise();
+    return {
+      statusCode: 200,
+      body: JSON.stringify({
+        db_data: variable,
+        message: "Successfully Retrieved data from DynamoDB table",
+      }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({
+        error_message: error.message,
+        message: "Unable to retrieve data from the table, check it out!",
+      }),
+    };
+  }
+};
+```
+
+### `!dbDES`
+
+```
+const function_name = async () => {
+  const params = {
+    TableName: "`TableNameValue`",
+  };
+
+  try {
+    const variable = await db.describeTable(params).promise();
+    return {
+      statusCode: 200,
+      message: JSON.stringify({
+        data: variable.Table.KeySchema,
+        message: "Successfully retrieved the selected table's descriptions",
+      }),
+    };
+  } catch (err) {
+    return {
+      statusCode: 500,
+      message: JSON.stringify({
+        error: err.message,
+        message: "Unable to retrieve the selected table's descriptions",
+      }),
+    };
+  }
+};
+```
+
+### `!dbLT`
+
+```
+const function_name = async () => {
+  try {
+    const variable = await db.listTables({ Limit: variable }).promise();
+    return {
+      statusCode: 200,
+      message: JSON.stringify({
+        data: variable.TableNames,
+        message: "Successfully retrieved the table list",
+      }),
+    };
+  } catch (err) {
+    return {
+      statusCode: 500,
+      message: JSON.stringify({
+        error: err.message,
+        message: "Unable to retrieve the table list",
+      }),
+    };
+  }
+};
+```
+
+### `!dbDT`
+
+```
+const function_name = async () => {
+  const params = {
+    TableName: TableNameValues,
+  };
+  try {
+    const variable = await db.deleteTable(params).promise();
+    return {
+      statusCode: 204,
+      message: JSON.stringify({
+        data: variable,
+        message: "Successfully deleted the table",
+      }),
+    };
+  } catch (err) {
+    return {
+      statusCode: 500,
+      message: JSON.stringify({
+        error: err.message,
+        message: "Error: Table not found",
+      }),
+    };
+  }
+};
+```
+
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
@@ -602,6 +989,10 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 [MIT](https://github.com/antstackio/aws-serverless-code-snippets/blob/master/LICENSE)
 
 ## Release Notes
+
+### 1.1.1
+
+- Added dynamodb snippet templates in README file
 
 ### 1.1.0
 

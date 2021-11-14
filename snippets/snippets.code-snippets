@@ -581,6 +581,14 @@
     ],
     "description": "SNS Delete Platform Application Template"
   },
+  "DynamoDB import with AWS SDK": {
+    "prefix": "cadb",
+    "body": [
+      "const AWS = require('aws-sdk');",
+      "const db = new AWS.DynamoDB();"
+    ],
+    "description": " dynamodb import statement using AWS SDK"
+  },
   "DynamoDb create table ": {
     "prefix": "!dbC",
     "body": [
@@ -761,7 +769,7 @@
       "",
       "const ${1:function_name} = async () => {",
       "  const ${2:params} = {",
-      "    TableName: \"`${3:TableName}`\"",
+      "    TableName: \"`${3:TableName}`\",",
       "    KeyConditionExpression: \"`${4:ConditionExpression}`\",",
       "    FilterExpression: '${5:FilterExpressionValues}',",
       "    ExpressionAttributeValues: {",
@@ -792,7 +800,7 @@
     "description": "Querying table with condition dynamodb table "
   },
   "Delete item from the table ": {
-    "prefix": "!dbD",
+    "prefix": "!dbDI",
     "body": [
       "const dbClient = new AWS.DynamoDB.DocumentClient();",
       "",
@@ -901,7 +909,7 @@
     "description": "Scan table to get the data"
   },
   "Describe selected table ": {
-    "prefix": "!dbD",
+    "prefix": "!dbDES",
     "body": [
       "const ${1:function_name} = async () => {",
       "  const ${2:params} = {",
