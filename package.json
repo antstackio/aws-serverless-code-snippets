@@ -3,7 +3,7 @@
   "displayName": "AWS Serverless Code Snippets",
   "description": "Javascript Code snippets for AWS services",
   "icon": "icon/logo.png",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "publisher": "AntStack",
   "engines": {
     "vscode": "^1.59.0"
