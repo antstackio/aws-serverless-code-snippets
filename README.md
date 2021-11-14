@@ -2,7 +2,6 @@
 
 With the use of this extension, you can increase your speed of creating AWS service functions with single command. This project is an open-source project.
 
-
 ## Features
 
 - You can create simple AWS Service functions with a single command. We have created snippets for AWS S3, SQS, and SNS services for now.
@@ -29,11 +28,12 @@ npm install aws-sdk
 
 #### Basic Snippets
 
-|  Prefix | Method                                                        |
-| ------: | ------------------------------------------------------------- |
-| `cas3→` | `const AWS = require('aws-sdk');`,`const s3 = new AWS.S3()`   |
-| `casq→` | `const AWS = require('aws-sdk');`,`const sqs = new AWS.SQS()` |
-| `casn→` | `const AWS = require('aws-sdk');`,`const sns = new AWS.SNS()` |
+|   Prefix | Method                                                            |
+| -------: | ----------------------------------------------------------------- |
+|  `cas3→` | `const AWS = require('aws-sdk');`,`const s3 = new AWS.S3()`       |
+|  `casq→` | `const AWS = require('aws-sdk');`,`const sqs = new AWS.SQS()`     |
+|  `casn→` | `const AWS = require('aws-sdk');`,`const sns = new AWS.SNS()`     |
+| `cadb->` | `const AWS = require('aws-sdk');`,`const db = new AWS.DynamoDB()` |
 
 ### `!s3Upload`
 
@@ -587,6 +587,7 @@ const function_name = async () => {
 
 ```
 
+## DynamoDB Snippets
 
 ## Contributing
 
@@ -600,8 +601,15 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 [MIT](https://github.com/antstackio/aws-serverless-code-snippets/blob/master/LICENSE)
 
-
 ## Release Notes
+
+### 1.1.0
+
+- Added snippets for AWS DynamoDB Service
+
+### 1.0.2
+
+- Added Icon for the vs code extension
 
 ### 1.0.1
 
@@ -614,4 +622,3 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## Initial Release of AWS JavaScript code snippet extension to increase productivity.
 
 - AWS-SDK JavaScript snippets for S3 Bucket, Simple Queue Service and Simple Notification Service
-
