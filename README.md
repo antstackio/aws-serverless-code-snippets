@@ -28,12 +28,13 @@ npm install aws-sdk
 
 #### Basic Snippets
 
-|  Prefix | Method                                                            |
-| ------: | ----------------------------------------------------------------- |
-| `cas3→` | `const AWS = require('aws-sdk');`,`const s3 = new AWS.S3()`       |
-| `casq→` | `const AWS = require('aws-sdk');`,`const sqs = new AWS.SQS()`     |
-| `casn→` | `const AWS = require('aws-sdk');`,`const sns = new AWS.SNS()`     |
-| `cadb→` | `const AWS = require('aws-sdk');`,`const db = new AWS.DynamoDB()` |
+|  Prefix | Method                                                                 |
+| ------: | -----------------------------------------------------------------------|
+| `cas3→` | `const AWS = require('aws-sdk');`,`const s3 = new AWS.S3()`            |
+| `casq→` | `const AWS = require('aws-sdk');`,`const sqs = new AWS.SQS()`          |
+| `casn→` | `const AWS = require('aws-sdk');`,`const sns = new AWS.SNS()`          |
+| `cadb→` | `const AWS = require('aws-sdk');`,`const db = new AWS.DynamoDB()`      |
+| `casf→` | `const AWS = require('aws-sdk');`,`const sf = new AWS.StepFunctions();`|
 
 ### `!s3Upload`
 
@@ -975,6 +976,512 @@ const function_name = async () => {
   }
 };
 ```
+## StepFunctions Snippets
+
+### `!sfCA`
+
+```
+const function_name = async () => {
+        const params = {
+               name: `activity_name`
+        };
+        try {
+          const variable = await sf.createActivity(params).promise();
+          return  variable
+ 
+        } catch (err) {
+          
+           return {
+              error: err.message
+              message: "Error: Activity cannot be created "
+            }
+        }
+      };
+```
+### `!sfCSM`
+
+```
+const function_name = async () => {
+        const params = {
+               definition: `definition`,
+               name: `name`,
+               roleArn: `arn`   
+      /*  loggingConfiguration: { */
+      /*    destinations: [ */
+      /*      { */
+      /*          cloudWatchLogsLogGroup: { */
+      /*            logGroupArn: 'STRING_VALUE' */
+      /*          } */
+      /*      } */
+                                               
+      /*       more items  */
+                                               
+      /*    ] */
+      /*    includeExecutionData: true || false */
+      /*    level: ALL | ERROR | FATAL | OFF */
+      /*  } */
+      /*  tags: [ */
+      /*    { */
+      /*      key: 'STRING_VALUE' */
+      /*      value: 'STRING_VALUE' */
+      /*    } */
+                                               
+      /*     more items */ 
+                                               
+      /*  ] */
+      /*  tracingConfiguration: { */
+      /*    enabled: true || false */
+      /*  } */
+      /*    type: STANDARD | EXPRESS */
+        };
+        try {
+          const variable = await sf.createStateMachine(params).promise();
+           return  variable
+
+        } catch (err) {
+          
+           return {
+              error: err.message
+              message: "Error: State Machine cannot be created "
+             }
+        }
+      };
+```
+### `!sfDA`
+
+```
+const function_name = async () => {
+        const params = {
+                activityArn: `activityArn` 
+        };
+        try {
+          const variable = await sf.deleteActivity(params).promise();
+           return  variable
+              
+        } catch (err) {
+          
+           return {
+              error: err.message
+              message: "Error: Activity cannot be deleted "
+              }
+        }
+      };
+```
+ 
+### `!sfDSM`
+
+```
+const function_name = async () => {
+        const params = {
+               stateMachineArn: `stateMachineArn` 
+        };
+        try {
+          const variable = await sf.deleteStateMachine(params).promise();
+           return  variable
+
+        } catch (err) {
+          
+           return {
+              error: err.message
+              message: "Error: State Machine cannot be deleted "
+              }
+        }
+      };
+      
+```
+
+### `!sfDsA`
+
+```
+const function_name = async () => {
+        const params = {
+                activityArn: `activityArn` 
+        };
+        try {
+          const variable = await sf.describeActivity(params).promise();
+           return  variable
+
+        } catch (err) {
+          
+           return {
+              error: err.message
+              message: "Error: Activity cannot be described "
+              }
+        }
+      };
+      
+```
+### `!sfDsSM`
+
+```
+const function_name = async () => {
+        const params = {
+               stateMachineArn: `stateMachineArn` 
+        };
+        try {
+          const variable = await sf.describeStateMachine(params).promise();
+           return  variable
+        } catch (err) {
+           return {
+              error: err.message
+              message: "Error: State Machine cannot be describes "
+              }
+        }
+      };
+      
+```
+### `!sfDsE`
+
+```
+const function_name = async () => {
+        const params = {
+               executionArn: `executionArn` 
+        };
+        try {
+          const 4:variable} = await sf.describeExecution(params).promise();
+           return  variable
+        } catch (err) {
+           return {
+              error: err.message
+              message: "Error: Execution cannot be described" 
+              }
+        }
+      };
+```
+
+### `!sfGAT`
+
+```
+const function_name = async () => {
+        const params = {
+               executionArn: `executionArn` 
+        };
+        try {
+          const variable = await sf.getActivityTask(params).promise();
+           return  variable
+        } catch (err) {
+           return {
+              error: err.message
+              message: "Error: Cannot get the  Activity Task" 
+              }
+        }
+      };
+```
+
+### `!sfGEH`
+
+```
+const function_name = async () => {
+        const params = {
+               executionArn: `executionArn` 
+               /* includeExecutionData: true || false */
+               /* maxResults: 'NUMBER' */ 
+               /* nextToken: 'STRING' */
+               /* reverseOrder: true || false */
+        };
+        try {
+          const variable = await sf.getExecutionHistory(params).promise();
+           return  variable
+        } catch (err) {
+           return {
+              error: err.message
+              message: "Error: Cannot get the  Execution History 
+              }
+        }
+      };
+```
+### `!sfLA`
+
+```
+const function_name = async () => {
+        const params = {
+               maxResults: `maxResults` 
+               nextToken:`nextToken`  
+        };
+        try {
+          const variable = await sf.listActivities(params).promise();
+           return  variable
+        } catch (err) {
+           return {
+              error: err.message
+              message: "Error: Cannot list  the Activities "
+              }
+        }
+      };
+```
+### `!sfLE`
+
+```
+const function_name = async () => {
+        const params = {
+               stateMachineArn: `stateMachineArn` 
+               /* includeExecutionData: true || false */
+               /* maxResults: 'NUMBER' */ 
+               /* nextToken: 'STRING' */
+               /* statusFilter: RUNNING | SUCCEEDED | FAILED | TIMED_OUT | ABORTED */
+        };
+        try {
+          const variable = await sf.listExecutions(params).promise();
+           return  variable
+        } catch (err) {
+           return {
+              error: err.message
+              message: "Error: Cannot list  the Executions "
+              }
+        }
+      };
+```
+### `!sfLSM`
+
+```
+const function_name = async () => {
+        const params = {
+               maxResults: `maxResults` 
+               nextToken:`nextToken`  
+        };
+        try {
+          const variable = await sf.listStateMachines(params).promise();
+           return  variable
+        } catch (err) {
+           return {
+              error: err.message
+              message: "Error: Cannot list  the State Machines "
+              }
+        }
+      };
+```
+### `!sfLTR`
+
+```
+const function_name = async () => {
+        const params = {
+               resourceArn: `resourceArn` 
+        };
+        try {
+          const variable = await sf.listTagsForResource(params).promise();
+           return  variable
+        } catch (err) {
+           return {
+              error: err.message
+              message: "Error: Cannot list  Tags for Resource "
+              }
+        }
+      };
+```
+### `!sfRTF`
+
+```
+const function_name = async () => {
+        const params = {
+               taskToken: `taskToken` 
+               /* cause: 'STRING' */ 
+               /* error: 'STRING' */
+        };
+        try {
+          const variable = await sf.sendTaskFailure(params).promise();
+           return  variable
+        } catch (err) {
+           return {
+              error: err.message
+              message: "Error: Cannot report Tasks failure "
+              }
+        }
+      };
+```
+### `!sfRTH`
+
+```
+const function_name = async () => {
+        const params = {
+               taskToken: `taskToken` 
+               /* cause: 'STRING' */ 
+               /* error: 'STRING' */
+        };
+        try {
+          const variable = await sf.sendTaskHeartbeat(params).promise();
+          return  variable
+        } catch (err) {
+           return {
+              error: err.message
+              message: "Error: Cannot report Tasks heartbeat "
+              }
+        }
+      };
+```
+### `!sfRTS`
+
+```
+const function_name = async () => {
+        const params = {
+               taskToken: `taskToken` 
+               /* cause: 'STRING' */ 
+               /* error: 'STRING' */
+        };
+        try {
+          const variable = await sf.sendTaskSuccess(params).promise();
+          return  variable
+        } catch (err) {
+           return {
+              message: "Error: Cannot report Tasks Success "
+              }
+        }
+      };
+```
+### `!sfSE`
+
+```
+const function_name = async () => {
+        const params = {
+               stateMachineArn: `stateMachineArn` 
+               /* input: 'STRING' */ 
+               /* name: 'STRING' */
+               /* traceHeader: 'STRING' */
+        };
+        try {
+          const variable = await sf.startExecution(params).promise();
+          return  variable
+        } catch (err) {
+           return {
+              message: "Error: Cannot execute this State Machine "
+              }
+        }
+      };
+};
+```
+### `!sfSSE`
+
+```
+const function_name = async () => {
+        const params = {
+               stateMachineArn: `stateMachineArn` 
+               /* input: 'STRING' */ 
+               /* name: 'STRING' */
+               /* traceHeader: 'STRING' */
+        };
+        try {
+          const variable = await sf.startSyncExecution(params).promise();
+           return  variable
+        } catch (err) {
+           return {
+              error: err.message
+              message: "Error: Cannot execute this State Machine Synchronously "
+              }
+        }
+      };
+```
+### `!sfSPE`
+
+```
+const function_name = async () => {
+        const params = {
+               stateMachineArn: `stateMachineArn` 
+               /* cause: 'STRING' */ 
+               /* error: 'STRING' */
+        };
+        try {
+          const variable = await sf.stopExecution(params).promise();
+           return  variable
+
+        } catch (err) {
+          
+           return {
+              error: err.message
+              message: "Error: Cannot stop the execution this State Machine " 
+              }
+        }
+      };
+```
+### `!sfTR`
+
+```
+const function_name = async () => {
+        const params = {
+               stateMachineArn: `stateMachineArn` 
+                tags: [ /* required */
+                  {
+                    key:`key`
+                    value: `value`
+                  }
+                  /* more items */       
+        };
+        try {
+          const variable = await sf.tagResource(params).promise();
+           return  variable
+              
+          
+        } catch (err) {
+          
+           return {
+              error: err.message
+              message: "Error: Cannot tag Resource " 
+              }
+        }
+      };
+```
+### `!sfUTR`
+
+```
+const function_name = async () => {
+        const params = {
+               stateMachineArn: `stateMachineArn` 
+        tagKeys: [ /* required */
+            key:`key`
+          /* more items */       
+        };
+        try {
+          const variable = await sf.untagResource(params).promise();
+           return  variable
+              
+          
+        } catch (err) {
+          
+           return {
+              error: err.message
+              message: "Error: Cannot Untag the Resource " 
+              }
+        }
+      };
+```
+
+### `!sfUSM`
+
+```
+const function_name = async () => {
+        const params = {
+               stateMachineArn: `stateMachineArn` 
+       /* definition: 'STRING' */
+       /*  loggingConfiguration: { */
+       /*   destinations: [ */
+       /*       { */
+       /*         cloudWatchLogsLogGroup: { */
+       /*         logGroupArn: 'STRING' */
+       /*         } */
+       /*      } */
+       /*       more items  */
+       /*    ] */
+       /*    includeExecutionData: true || false */
+       /*    level: ALL | ERROR | FATAL | OFF */
+       /*  } */
+       /*  roleArn: 'STRING' */
+       /*  tracingConfiguration: { */
+       /*    enabled: true || false */
+       /*  } */
+        }; 
+        try {
+          const variable = await sf.updateStateMachine(params).promise();
+          return  variable
+              
+          
+        } catch (err) {
+          
+           return {
+              error: err.message
+              message: "Error: Cannot update the StateMachine  "
+              }
+        }
+      };
+```
+
 
 ## Contributing
 
