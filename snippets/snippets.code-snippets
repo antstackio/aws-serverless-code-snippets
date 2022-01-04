@@ -995,5 +995,76 @@
       ""
     ],
     "description": "Delete Table"
+  },
+  "StepFunctions import with AWS SDK": {
+    "prefix": "!sfCSF",
+    "body": [
+      "const AWS = require('aws-sdk');",
+      "const stepfunctions = new AWS.StepFunctions();"
+    ],
+    "description": " StepFunctions import statement using AWS SDK"
+  },
+  "Create Activity in StepFunctions": {
+    "prefix": "!sfCA",
+    "body": [
+      "const ${1:function_name} = async () => {",
+      "  const ${2:params} = {",
+      "         name: \"`${3:activity_name}`\",",
+      "  };",
+      "  try {",
+      "    const ${4:variable} = await stepfunctions.createActivity(${2:params}).promise();",
+      "    return {",
+      "      statusCode: 204,",
+      "      message: JSON.stringify({",
+      "        data: ${5:variable},",
+      "        message: \"Successfully created Activity in StepFunctions\",",
+      "      }),",
+      "    };",
+      "  } catch (err) {",
+      "    return {",
+      "      statusCode: 500,",
+      "      message: JSON.stringify({",
+      "        error: err.message,",
+      "        message: \"Error: Activity cannot be created \",",
+      "      }),",
+      "    };",
+      "  }",
+      "};",
+      ""
+    ],
+    "description": "Create an Activity in StepFunctions"
+  },
+  "Creates a State Machine in StepFunctions": {
+    "prefix": "!sfSM",
+    "body": [
+      "const ${1:function_name} = async () => {",
+      "  const ${2:params} = {",
+      "         definition: \"`${3:definition}`\", ",
+      "         name: \"`${4:name}`\",",
+      "         roleArn: \"`${5:arn}`\",   ",
+      "         type: STANDARD | EXPRESS",
+      "  };",
+      "  try {",
+      "    const ${6:variable} = await stepfunctions.createStateMachine(${2:params}).promise();",
+      "    return {",
+      "      statusCode: 204,",
+      "      message: JSON.stringify({",
+      "        data: ${6:variable},",
+      "        message: \"Successfully created a State Machine\",",
+      "      }),",
+      "    };",
+      "  } catch (err) {",
+      "    return {",
+      "      statusCode: 500,",
+      "      message: JSON.stringify({",
+      "        error: err.message,",
+      "        message: \"Error: State Machine cannot be created \",",
+      "      }),",
+      "    };",
+      "  }",
+      "};",
+      ""
+    ],
+    "description": "Create State Machine in StepFunctions"
   }
 }
